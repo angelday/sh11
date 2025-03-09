@@ -34,6 +34,7 @@
     <script src="codef_3d.js"></script>
     <script src="codef_tween.js"></script>
     <script src="codef_mouse.js"></script>
+    <script src="codef_decrunch.js"></script>
     <script type="text/javascript">var mobileSafari = false;</script>
     <script src="pt.js"></script>
 
@@ -72,7 +73,7 @@
         }
 
         var ready_to_play = 0;
-        var mycanvas;
+        // var mycanvas;
         var modsample = new Array();
 
         function load_module() {
@@ -83,9 +84,67 @@
 
         function init() {
             if ((audio == 1) && (loading == 0)) load_module();
-            if (currLoaded == allLoaded) pre_go();
+            if (currLoaded == allLoaded) {
+                        pre_go();
+            }
             else requestAnimFrame(init);
         }
+
+
+
+        /* new stuff, decrunch */
+
+
+
+
+
+        decruncher = new AmigaDecrunch(2, 2, 30, 400);
+
+        disk = new Audio();
+        disk.autobuffer = true;
+        disk.loop = false;
+        disk.src = ("disk.wav");
+
+        var rasterY = 3;
+        var sinparam = 0;
+        var rasterlines = new image("rasterlines.png");
+
+        function decrunch() {
+
+            console.log("decrunch");
+
+            if (decruncher.finished == 1) {
+
+                disk.pause();
+            } else {
+                decruncher.doDecrunch(mycanvas);
+
+                if (decruncher.DecrunchVBLs >= decruncher.DecrunchMaxVBL / 2) {
+                    decruncher.DType = 1;
+
+                    if (decruncher.DecrunchVBLs >= decruncher.DecrunchMaxVBL - 20)
+                        decruncher.DType = 2;
+
+                }
+
+                rasterlines.draw(mycanvas, 0, -5 - rasterY, 0.3, 0, 1, 1.5);
+                rasterY = Math.sin(15 * sinparam) * 5;
+
+                sinparam += 0.04;
+                requestAnimFrame(decrunch);
+            }
+        }
+
+
+        /* decrunch end */
+
+
+
+
+
+
+
+
 
         function pre_go() {
             if (audio == 0) init2();
@@ -95,7 +154,7 @@
                     module.separation = false;
                     module.play();
                     init2();
-                } else requestAnimFrame(init);
+                } else requestAnimFrame(pre_go); //init
             }
         }
 
@@ -146,6 +205,7 @@
 
             MyMouseTracker = new MouseTracker();
             MyMouseTracker.addMouseTrack(mycanvas, false);
+
             part1();
         }
 
@@ -647,7 +707,6 @@
 
 
     <style type="text/css">
-        
         body {
             margin: 0;
             padding: 0;
@@ -674,17 +733,19 @@
             width: 406px;
             height: 284px;
         }
-        
+
         #a500 {
             padding: 0;
             margin: 0;
         }
+
         #wb13 {
             position: absolute;
             bottom: 266px;
             left: 238px;
             width: 410px;
         }
+
         #sh11 {
             position: absolute;
             bottom: 100px;
@@ -697,10 +758,10 @@
 <body>
     <div class="background-container">
         <canvas></canvas>
-        <img id ="a500" src="a500_c.jpg" />
-        
+        <img id="a500" src="a500_c.jpg" />
+
         <img id="wb13" src="wb13.png" />
-        <img id="sh11" src="sh11_f.png" onclick="init();"/>
+        <img id="sh11" src="sh11_f.png" onclick="init();" />
     </div>
     <div id="main"></div>
 
