@@ -39,16 +39,20 @@
     <script src="pt.js"></script>
 
     <script>
-        var biga = new image('abs-a.png');
-        var countdown = new image('abs-countdown.png');
-        var numbers = new image('abs-numbers.png');
-        var logo = new image('abs-logo.png');
-        var sledge = new image('abs-sledge.png');
-        var font = new image('abs-font.png');
-        var pointex = new image('abs-!.png');
+        let biga = new image('abs-a.png');
+        let countdown = new image('abs-countdown.png');
+        let numbers = new image('abs-numbers.png');
+        let logo = new image('abs-logo.png');
+        let sledge = new image('abs-sledge.png');
+        let font = new image('abs-font.png');
+        let pointex = new image('abs-!.png');
+
+        const module = new Protracker();
+        module.setautostart(false);
+        module.load("ABSOLUTE-Sledgehammer11Intro.mod");
 
         var currLoaded = 0;
-        var allLoaded = 7;
+        var allLoaded = 8;
         function inc_cur() {
             currLoaded++;
 
@@ -61,33 +65,19 @@
         font.img.onload = function () { inc_cur(); }
         pointex.img.onload = function () { inc_cur(); }
 
-
-        const module = new Protracker();
-
-        let loading = 0;
-        let ready_to_play = 0;
-        let audio = 1;
-
-
-        module.onReady = function () {
+        module.onReady = function () { // gets called automatically
             module.repeat = true;
             module.separation = false;
-            module.play();
-
-            console.log("module ready and playing called");
+            currLoaded++;
+            console.log("module ready");
         }
 
         var modsample = new Array();
 
-        function load_module() {
-            loading = 1;
-            module.setautostart(false);
-            module.load("ABSOLUTE-Sledgehammer11Intro.mod");
-        }
-
         function init() {
-            if (loading == 0) load_module();
+
             if (currLoaded == allLoaded) {
+                module.play();
                 init2();
             }
             else requestAnimFrame(init);
