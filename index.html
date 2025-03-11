@@ -70,8 +70,11 @@
 
 
         module.onReady = function () {
-            ready_to_play = 1;
-            console.log("module ready");
+            module.repeat = true;
+            module.separation = false;
+            module.play();
+
+            console.log("module ready and playing called");
         }
 
         var modsample = new Array();
@@ -85,26 +88,10 @@
         function init() {
             if (loading == 0) load_module();
             if (currLoaded == allLoaded) {
-                pre_go();
+                init2();
             }
             else requestAnimFrame(init);
         }
-
-
-
-        function pre_go() {
-            if (audio == 0) init2();
-            else {
-                if (ready_to_play == 1) {
-                    module.repeat = true;
-                    module.separation = false;
-                    module.play();
-                    init2();
-                } else requestAnimFrame(pre_go); //init
-            }
-        }
-
-
 
 
 
