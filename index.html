@@ -39,21 +39,28 @@
     <script src="pt.js"></script>
 
     <script>
-        let biga = new image('abs-a.png');
-        let countdown = new image('abs-countdown.png');
-        let numbers = new image('abs-numbers.png');
-        let logo = new image('abs-logo.png');
-        let sledge = new image('abs-sledge.png');
-        let font = new image('abs-font.png');
-        let pointex = new image('abs-!.png');
+        const biga = new image('abs-a.png');
+        const countdown = new image('abs-countdown.png');
+        const numbers = new image('abs-numbers.png');
+        const logo = new image('abs-logo.png');
+        const sledge = new image('abs-sledge.png');
+        const font = new image('abs-font.png');
+        const pointex = new image('abs-!.png');
 
         const module = new Protracker();
-        module.setautostart(false);
+
+        // set up music parameters
         module.load("ABSOLUTE-Sledgehammer11Intro.mod");
+        module.setautostart(false);
+        module.repeat = true;
+        module.separation = false;
+
 
         var currLoaded = 0;
         var allLoaded = 8;
 
+
+        // if ready, increment currLoaded
         biga.img.onload = function () { currLoaded++; }
         countdown.img.onload = function () { currLoaded++; }
         numbers.img.onload = function () { currLoaded++; }
@@ -61,13 +68,10 @@
         sledge.img.onload = function () { currLoaded++; }
         font.img.onload = function () { currLoaded++; }
         pointex.img.onload = function () { currLoaded++; }
+        module.onReady = function () { currLoaded++; } 
 
-        module.onReady = function () { // gets called automatically on module ready
-            module.repeat = true;
-            module.separation = false;
-            currLoaded++;
-            console.log("module ready");
-        }
+
+
 
 
         function init() {
