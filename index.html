@@ -51,6 +51,7 @@
         var allLoaded = 7;
         function inc_cur() {
             currLoaded++;
+
         }
         biga.img.onload = function () { inc_cur(); }
         countdown.img.onload = function () { inc_cur(); }
@@ -61,20 +62,18 @@
         pointex.img.onload = function () { inc_cur(); }
 
 
-        var module;
-        var audio = 0;
-        var loading = 0;
+        const module = new Protracker();
 
-        audio = 1;
-        module = new Protracker();
+        let loading = 0;
+        let ready_to_play = 0;
+        let audio = 1;
+
 
         module.onReady = function () {
-            ready_to_play = 1;        
+            ready_to_play = 1;
+            console.log("module ready");
         }
 
-        var ready_to_play = 0;
-        
-        // var mycanvas;
         var modsample = new Array();
 
         function load_module() {
@@ -84,66 +83,12 @@
         }
 
         function init() {
-            if ((audio == 1) && (loading == 0)) load_module();
+            if (loading == 0) load_module();
             if (currLoaded == allLoaded) {
-                        pre_go();
+                pre_go();
             }
             else requestAnimFrame(init);
         }
-
-
-
-        /* new stuff, decrunch */
-
-
-/*
-
-
-        decruncher = new AmigaDecrunch(2, 2, 30, 400);
-
-        disk = new Audio();
-        disk.autobuffer = true;
-        disk.loop = false;
-        disk.src = ("disk.wav");
-
-        var rasterY = 3;
-        var sinparam = 0;
-        var rasterlines = new image("rasterlines.png");
-
-        function decrunch() {
-
-            console.log("decrunch");
-
-            if (decruncher.finished == 1) {
-
-                disk.pause();
-            } else {
-                decruncher.doDecrunch(mycanvas);
-
-                if (decruncher.DecrunchVBLs >= decruncher.DecrunchMaxVBL / 2) {
-                    decruncher.DType = 1;
-
-                    if (decruncher.DecrunchVBLs >= decruncher.DecrunchMaxVBL - 20)
-                        decruncher.DType = 2;
-
-                }
-
-                rasterlines.draw(mycanvas, 0, -5 - rasterY, 0.3, 0, 1, 1.5);
-                rasterY = Math.sin(15 * sinparam) * 5;
-
-                sinparam += 0.04;
-                requestAnimFrame(decrunch);
-            }
-        }
-*/
-
-        /* decrunch end */
-
-
-
-
-
-
 
 
 
@@ -158,6 +103,66 @@
                 } else requestAnimFrame(pre_go); //init
             }
         }
+
+
+
+
+
+
+        /* new stuff, decrunch */
+
+
+        /*
+        
+        
+                decruncher = new AmigaDecrunch(2, 2, 30, 400);
+        
+                disk = new Audio();
+                disk.autobuffer = true;
+                disk.loop = false;
+                disk.src = ("disk.wav");
+        
+                var rasterY = 3;
+                var sinparam = 0;
+                var rasterlines = new image("rasterlines.png");
+        
+                function decrunch() {
+        
+                    console.log("decrunch");
+        
+                    if (decruncher.finished == 1) {
+        
+                        disk.pause();
+                    } else {
+                        decruncher.doDecrunch(mycanvas);
+        
+                        if (decruncher.DecrunchVBLs >= decruncher.DecrunchMaxVBL / 2) {
+                            decruncher.DType = 1;
+        
+                            if (decruncher.DecrunchVBLs >= decruncher.DecrunchMaxVBL - 20)
+                                decruncher.DType = 2;
+        
+                        }
+        
+                        rasterlines.draw(mycanvas, 0, -5 - rasterY, 0.3, 0, 1, 1.5);
+                        rasterY = Math.sin(15 * sinparam) * 5;
+        
+                        sinparam += 0.04;
+                        requestAnimFrame(decrunch);
+                    }
+                }
+        */
+
+        /* decrunch end */
+
+
+
+
+
+
+
+
+
 
         var mycanvas, colorCanvas, my3d;
         var loadObj1;
