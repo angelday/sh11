@@ -49,16 +49,11 @@
 
         const module = new Protracker();
 
-        // set up music parameters
+        // music setup
         module.load("ABSOLUTE-Sledgehammer11Intro.mod");
         module.setautostart(false);
         module.repeat = true;
         module.separation = false;
-
-
-        var currLoaded = 0;
-        var allLoaded = 8;
-
 
         // if ready, increment currLoaded
         biga.img.onload = function () { currLoaded++; }
@@ -72,16 +67,19 @@
 
 
 
+        let currLoaded = 0; // will be hoisted to the top of the scope
 
 
         function init() {
 
-            if (currLoaded == allLoaded) {
+            if (currLoaded == 8) {
                 module.play();
                 init2();
             }
             else requestAnimFrame(init);
         }
+
+
 
 
 
