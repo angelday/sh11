@@ -39,15 +39,15 @@
     <script src="pt.js"></script>
 
     <script>
-        const biga = new image('abs-a.png');
-        const countdown = new image('abs-countdown.png');
-        const numbers = new image('abs-numbers.png');
-        const logo = new image('abs-logo.png');
-        const sledge = new image('abs-sledge.png');
-        const font = new image('abs-font.png');
-        const pointex = new image('abs-!.png');
+        const biga              = new image('abs-a.png');
+        const countdown         = new image('abs-countdown.png');
+        const numbers           = new image('abs-numbers.png');
+        const logo              = new image('abs-logo.png');
+        const sledge            = new image('abs-sledge.png');
+        const font              = new image('abs-font.png');
+        const pointex           = new image('abs-!.png');
 
-        const module = new Protracker();
+        const module            = new Protracker();
 
         // music setup
         module.load("ABSOLUTE-Sledgehammer11Intro.mod");
@@ -72,7 +72,7 @@
 
             if (currLoaded == 8) {
                 module.play();
-                init2();
+                run_demo();
             }
             else requestAnimFrame(init);
         }
@@ -145,7 +145,7 @@
         var loadObj1;
         var mycanvastxt = [];
         var mycanvastxt2 = [];
-        function init2() {
+        function run_demo() {
             mycanvas = new canvas(720, 568, "main");
             mycanvas3d = new canvas(360, 284);
             mycanvas2 = new canvas(720, 568);
