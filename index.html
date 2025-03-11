@@ -53,17 +53,14 @@
 
         var currLoaded = 0;
         var allLoaded = 8;
-        function inc_cur() {
-            currLoaded++;
 
-        }
-        biga.img.onload = function () { inc_cur(); }
-        countdown.img.onload = function () { inc_cur(); }
-        numbers.img.onload = function () { inc_cur(); }
-        logo.img.onload = function () { inc_cur(); }
-        sledge.img.onload = function () { inc_cur(); }
-        font.img.onload = function () { inc_cur(); }
-        pointex.img.onload = function () { inc_cur(); }
+        biga.img.onload = function () { currLoaded++; }
+        countdown.img.onload = function () { currLoaded++; }
+        numbers.img.onload = function () { currLoaded++; }
+        logo.img.onload = function () { currLoaded++; }
+        sledge.img.onload = function () { currLoaded++; }
+        font.img.onload = function () { currLoaded++; }
+        pointex.img.onload = function () { currLoaded++; }
 
         module.onReady = function () { // gets called automatically on module ready
             module.repeat = true;
@@ -72,7 +69,6 @@
             console.log("module ready");
         }
 
-        var modsample = new Array();
 
         function init() {
 
@@ -83,6 +79,10 @@
             else requestAnimFrame(init);
         }
 
+
+
+
+        var modsample = new Array();
 
 
 
