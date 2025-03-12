@@ -39,6 +39,7 @@
     <script src="pt.js"></script>
 
     <script>
+
         const biga              = new image('abs-a.png');
         const countdown         = new image('abs-countdown.png');
         const numbers           = new image('abs-numbers.png');
@@ -55,6 +56,7 @@
         module.repeat = true;
         module.separation = false;
 
+        
         // if ready, increment currLoaded
         biga.img.onload         = () => { currLoaded++; }
         countdown.img.onload    = () => { currLoaded++; }
@@ -68,14 +70,18 @@
 
         let currLoaded = 0; // will be hoisted to the top of the scope
 
-        function init() {
+            function init() {
 
-            if (currLoaded == 8) {
-                module.play();
-                run_demo();
-            }
-            else requestAnimFrame(init);
-        }
+                if (currLoaded == 8) {
+                    
+
+
+                    disk.play();
+                    decrunch();
+                    //run_demo();
+                    }
+                else requestAnimFrame(init);
+    }
 
 
 
@@ -89,29 +95,34 @@
         /* new stuff, decrunch */
 
 
-        /*
+
         
         
                 decruncher = new AmigaDecrunch(2, 2, 30, 400);
-        
+ 
+		
+
+
                 disk = new Audio();
                 disk.autobuffer = true;
                 disk.loop = false;
                 disk.src = ("disk.wav");
-        
+                
                 var rasterY = 3;
                 var sinparam = 0;
                 var rasterlines = new image("rasterlines.png");
         
                 function decrunch() {
-        
-                    console.log("decrunch");
-        
+                    rastercanvas = new canvas(800, 600, "main");
+                    rastercanvas.contex.imageSmoothingEnabled = false;
+
                     if (decruncher.finished == 1) {
-        
+                        console.log('decrunch finished');
                         disk.pause();
+                        module.play();
+                        run_demo();
                     } else {
-                        decruncher.doDecrunch(mycanvas);
+                        decruncher.doDecrunch(rastercanvas);
         
                         if (decruncher.DecrunchVBLs >= decruncher.DecrunchMaxVBL / 2) {
                             decruncher.DType = 1;
@@ -121,14 +132,13 @@
         
                         }
         
-                        rasterlines.draw(mycanvas, 0, -5 - rasterY, 0.3, 0, 1, 1.5);
+                        rasterlines.draw(rastercanvas, 0, -5 - rasterY, 0.3, 0, 1, 1.5);
                         rasterY = Math.sin(15 * sinparam) * 5;
         
                         sinparam += 0.04;
                         requestAnimFrame(decrunch);
                     }
                 }
-        */
 
         /* decrunch end */
 
@@ -141,7 +151,7 @@
 
 
 
-        var mycanvas, colorCanvas, my3d;
+//        var mycanvas, colorCanvas, my3d;
         var loadObj1;
         var mycanvastxt = [];
         var mycanvastxt2 = [];
