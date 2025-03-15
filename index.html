@@ -51,6 +51,7 @@
         const module            = new Protracker();
         const disk              = new Audio();
 
+
         // music setup
         module.load("ABSOLUTE-Sledgehammer11Intro.mod");
         module.setautostart(false);
@@ -81,22 +82,14 @@
             function init() {
 
                 if (currLoaded == 9) {
-                    
-
-
-                    disk.play();
-                    decrunch();
-
-
-                    setTimeout(function() {
-    
-   module.play();
-}, 4500);
-//                     module.play();
-//                    run_demo();
+                        disk.play();
+                        module.play(); // start audio context
+                        module.pause(); // pause immediately so browser doesn't block audio
+                        
+                        decrunch();
                     }
                 else requestAnimFrame(init);
-    }
+            }
 
 
 
@@ -127,14 +120,10 @@
                     rastercanvas.contex.imageSmoothingEnabled = false;
 
                     if (decruncher.finished == 1) {
-
                         disk.pause();
-
-                //        module.play();
-
+                       
+                        module.play();
                         run_demo();
-
-
                     } else {
                         decruncher.doDecrunch(rastercanvas);
         
