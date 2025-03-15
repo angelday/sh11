@@ -76,9 +76,10 @@
                     
 
 
-                    disk.play();
-                    decrunch();
-                    //run_demo();
+//                    disk.play();
+//                    decrunch();
+                    module.play();
+                    run_demo();
                     }
                 else requestAnimFrame(init);
     }
@@ -117,9 +118,12 @@
                     rastercanvas.contex.imageSmoothingEnabled = false;
 
                     if (decruncher.finished == 1) {
-                        console.log('decrunch finished');
                         disk.pause();
+
+
                         module.play();
+
+
                         run_demo();
                     } else {
                         decruncher.doDecrunch(rastercanvas);
@@ -151,7 +155,7 @@
 
 
 
-//        var mycanvas, colorCanvas, my3d;
+        var mycanvas, colorCanvas, my3d;
         var loadObj1;
         var mycanvastxt = [];
         var mycanvastxt2 = [];
@@ -199,6 +203,7 @@
             MyMouseTracker = new MouseTracker();
             MyMouseTracker.addMouseTrack(mycanvas, false);
 
+
             part1();
         }
 
@@ -206,6 +211,7 @@
         var bigAlpha = 0;
         function part1() {
             mycanvas.fill('#000000');
+
 
             if (bigAlpha > 0) { bigAlpha -= 1 / 16 }
             biga.draw(mycanvas, 0, 0, bigAlpha);
