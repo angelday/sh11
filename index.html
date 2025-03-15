@@ -32,6 +32,25 @@
         THE SOFTWARE.
         ------------------------------------------------------------------------------*/
     </script>
+
+<script>
+    // Touch event handler for iOS
+    function handleTouch(event) {
+        event.preventDefault(); // Prevent default behavior
+        console.log("Touch detected!");
+        init(); // Call your existing init function
+    }
+    
+    // Make all images non-draggable (helps with touch events)
+    document.addEventListener('DOMContentLoaded', function() {
+        var images = document.getElementsByTagName('img');
+        for (var i = 0; i < images.length; i++) {
+            images[i].draggable = false;
+        }
+    });
+</script>
+
+
     <script src="codef_core.js"></script>
     <script src="codef_3d.js"></script>
     <script src="codef_tween.js"></script>
