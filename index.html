@@ -49,12 +49,19 @@
         const pointex           = new image('abs-!.png');
 
         const module            = new Protracker();
+        const disk              = new Audio();
 
         // music setup
         module.load("ABSOLUTE-Sledgehammer11Intro.mod");
         module.setautostart(false);
         module.repeat = true;
         module.separation = false;
+
+        // sound effect setup
+        disk.autobuffer = true;
+        disk.loop = false;
+        disk.src = ("disk.wav");
+
 
         
         // if ready, increment currLoaded
@@ -63,23 +70,30 @@
         numbers.img.onload      = () => { currLoaded++; }
         logo.img.onload         = () => { currLoaded++; }
         sledge.img.onload       = () => { currLoaded++; }
-        font.img.onload         = () => { currLoaded++; }
-        pointex.img.onload      = () => { currLoaded++; }
-        module.onReady          = () => { currLoaded++; } 
+        font.img.onload                  = () => { currLoaded++; }
+        pointex.img.onload               = () => { currLoaded++; }
+        module.onReady                   = () => { currLoaded++; console.log('module ready');} 
+        disk.oncanplaythrough            = () => { currLoaded++; console.log('disk ready');} 
 
 
         let currLoaded = 0; // will be hoisted to the top of the scope
 
             function init() {
 
-                if (currLoaded == 8) {
+                if (currLoaded == 9) {
                     
 
 
-//                    disk.play();
-//                    decrunch();
-                    module.play();
-                    run_demo();
+                    disk.play();
+                    decrunch();
+
+
+                    setTimeout(function() {
+    
+   module.play();
+}, 4500);
+//                     module.play();
+//                    run_demo();
                     }
                 else requestAnimFrame(init);
     }
@@ -104,11 +118,6 @@
 		
 
 
-                disk = new Audio();
-                disk.autobuffer = true;
-                disk.loop = false;
-                disk.src = ("disk.wav");
-                
                 var rasterY = 3;
                 var sinparam = 0;
                 var rasterlines = new image("rasterlines.png");
@@ -118,13 +127,14 @@
                     rastercanvas.contex.imageSmoothingEnabled = false;
 
                     if (decruncher.finished == 1) {
+
                         disk.pause();
 
-
-                        module.play();
-
+                //        module.play();
 
                         run_demo();
+
+
                     } else {
                         decruncher.doDecrunch(rastercanvas);
         
@@ -202,7 +212,6 @@
 
             MyMouseTracker = new MouseTracker();
             MyMouseTracker.addMouseTrack(mycanvas, false);
-
 
             part1();
         }
